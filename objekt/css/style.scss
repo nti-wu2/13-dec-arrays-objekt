@@ -10,10 +10,26 @@ body {
     display: flex;
     flex-direction: column;
     perspective: 400px;
+
+    > h1 {
+        font-size: 4rem;
+        color: white;
+        margin: auto;
+        margin-bottom: 0;
+    }
+
+    > h2 {
+        font-size: 2rem;
+        color: white;
+        margin: auto;
+        margin-top: 1rem;
+    }
 }
 
 header {
     padding: 1rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 main {

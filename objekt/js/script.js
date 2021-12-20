@@ -3,6 +3,7 @@ const deck = [];
 let previousCard = null;
 let activeCard = null;
 let score = 0;
+let attempts = 3;
 
 for(let i = 0; i<suits.length; i++){
 
@@ -45,7 +46,20 @@ function pickCard(){
 
 function updateScore(points){
     score += points;
-    document.querySelector('header').innerText = `poäng: ${score}p`;
+    document.querySelector('.score').innerText = `poäng: ${score}p`;
+}
+
+function updateAttempts(){
+    if(attempts > 1){
+        // game on!
+        attempts--
+        document.querySelector('.attempts').innerText = `försök kvar: ${attempts}`;
+    } else {
+        // Game over!
+        let body = document.querySelector('body');
+        body.style.backgroundColor = 'red';
+        body.innerHTML = `<h1>GAME OVER!</h1><h2>Du fick ${score} poäng.</h2>`
+    }
 }
 
 function updateUI(card){
@@ -88,6 +102,7 @@ document.querySelector('#lower').addEventListener('click', () => {
     } else {
         // Du gissade fel
         console.log('Felgissning!')
+        updateAttempts();
     }
 
 });
@@ -107,6 +122,7 @@ document.querySelector('#identical').addEventListener('click', () => {
         updateScore(100)
     } else {
         // fail!
+        updateAttempts();
     }
 
 });
@@ -125,6 +141,7 @@ document.querySelector('#higher').addEventListener('click', () => {
         updateScore(10)
     } else {
         // fail!
+        updateAttempts();
     }
 
 });
