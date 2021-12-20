@@ -82,7 +82,7 @@ document.querySelector('#lower').addEventListener('click', () => {
     pickCard();
 
     // compare
-    if(activeCard < previousCard ){
+    if(activeCard.value < previousCard.value ){
         // Du gissade rätt!
         updateScore(10);
     } else {
@@ -93,11 +93,40 @@ document.querySelector('#lower').addEventListener('click', () => {
 });
 
 document.querySelector('#identical').addEventListener('click', () => {
-    console.log('Du gissade att nästa kort är SAMMA VÄRDE!')
+    console.log('Du gissade att nästa kort är SAMMA VÄRDE!');
+
+    // skifta kort
+    previousCard = activeCard;
+
+    // nytt kort
+    pickCard();
+
+    // Jämför
+    if(previousCard.value === activeCard.value){
+        // Sucess!
+        updateScore(100)
+    } else {
+        // fail!
+    }
+
 });
 
 document.querySelector('#higher').addEventListener('click', () => {
-    console.log('Du gissade att nästa kort är HÖGRE!')
+    console.log('Du gissade att nästa kort är HÖGRE!');
+
+    // Skifta kort
+    previousCard = activeCard;
+
+    // dra nytt
+    pickCard();
+
+    // jämför
+    if(previousCard.value < activeCard.value){
+        updateScore(10)
+    } else {
+        // fail!
+    }
+
 });
 
 // init on game
