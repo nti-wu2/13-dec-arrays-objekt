@@ -58,7 +58,7 @@ function updateAttempts(){
         // Game over!
         let body = document.querySelector('body');
         body.style.backgroundColor = 'red';
-        body.innerHTML = `<h1>GAME OVER!</h1><h2>Du fick ${score} poäng.</h2>`
+        body.innerHTML = `<h1>GAME OVER!</h1><h2>Du fick ${score} poäng.</h2>`;
     }
 }
 
