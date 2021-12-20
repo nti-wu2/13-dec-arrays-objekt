@@ -5,12 +5,42 @@
 }
 
 body {
-    background-color: #999;
+    background: mediumaquamarine;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    perspective: 400px;
+}
+
+header {
+    padding: 1rem;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > p {
+        margin-top: 1rem;
+        opacity: .6;
+    }
+}
+
+footer {
+    height: 6rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    perspective: 400px;
+    gap: 2rem;
+    padding: 1rem;
+
+    button {
+        padding: .5rem;
+        border-radius: .5rem;
+    }
 }
 
 body article {
@@ -23,12 +53,8 @@ body article {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 2s ease;
 }
 
-body:hover article {
-    transform: translate3d(0,0,100px) rotateY(360deg) rotateX(180deg);
-}
 
 aside {
     font-size: 1.8rem;
@@ -50,4 +76,8 @@ aside.bottom {
 
 article .suit {
     color: rgb(219, 51, 51);
+}
+
+article.black .suit {
+    color: black;
 }

@@ -1,5 +1,8 @@
 const suits = ['&spades;', '&clubs;', '&hearts;', '&diams;'];
 const deck = [];
+let previousCard = null;
+let activeCard = null;
+let score = 0;
 
 for(let i = 0; i<suits.length; i++){
 
@@ -28,22 +31,31 @@ for(let i = 0; i<suits.length; i++){
     }
 }
 
-console.log(deck);
 
-
-
-function pickRandomCard(){
+function pickCard(){
+    
     let randomPosition = Math.floor(Math.random()*deck.length);
-    let pickedCard = deck[randomPosition];
-
-    generateCard(pickedCard);
+    let pickedCard = deck.splice(randomPosition, 1);  
+    
+    activeCard = pickedCard[0];
+    
+    updateUI(pickedCard[0]);
 
 }
 
-function generateCard(card){
+function updateScore(points){
+    score += points;
+    document.querySelector('header').innerText = `poäng: ${score}p`;
+}
+
+function updateUI(card){
+
+    let main = document.querySelector('main')
+    
+    main.innerHTML = '';
 
     let el = 
-    `<article>
+    `<article class="${card.color}">
         <aside>
             <p class="suit">${card.suit}</p>
             <p>${card.rank}</p>
@@ -53,12 +65,40 @@ function generateCard(card){
             <p class="suit">${card.suit}</p>
             <p>${card.rank}</p>
         </aside>
-    </article>`;
+    </article>
+    <p>${deck.length} kort kvar.</p>
+    `;
 
-    document.querySelector('main').insertAdjacentHTML('beforeend', el);
-
+    main.insertAdjacentHTML('beforeend', el);
 }
 
 
-pickRandomCard();
 
+document.querySelector('#lower').addEventListener('click', () => {
+    console.log('Du gissade att nästa kort är LÄGRE!')
+
+    previousCard = activeCard;
+
+    pickCard();
+
+    // compare
+    if(activeCard < previousCard ){
+        // Du gissade rätt!
+        updateScore(10);
+    } else {
+        // Du gissade fel
+        console.log('Felgissning!')
+    }
+
+});
+
+document.querySelector('#identical').addEventListener('click', () => {
+    console.log('Du gissade att nästa kort är SAMMA VÄRDE!')
+});
+
+document.querySelector('#higher').addEventListener('click', () => {
+    console.log('Du gissade att nästa kort är HÖGRE!')
+});
+
+// init on game
+pickCard();
